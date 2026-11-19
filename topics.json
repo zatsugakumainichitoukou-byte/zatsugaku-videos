@@ -15,5 +15,21 @@
     "format": "5選",
     "style": "pastel",
     "voice_preset": "nanami"
+  },
+  {
+    "date": "2026-11-19",
+    "theme": "動物",
+    "format": "クイズ",
+    "style": "night",
+    "voice_preset": "keita",
+    "facts": [
+      "ウォンバットのフンは四角い（腸壁の硬さの違い）",
+      "タコの心臓は3つ・血は青い（ヘモシアニン）",
+      "フラミンゴのピンクはエサのカロテノイド",
+      "ホッキョクグマの皮膚は黒・毛は透明",
+      "ラッコは脇の下のたるみに貝や石をしまう"
+    ],
+    "long_id": "q6thwRqgaMg",
+    "short_id": "F7CzMLbmHRc"
   }
 ]
