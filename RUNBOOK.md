@@ -56,3 +56,15 @@ URL: `https://raw.githubusercontent.com/zatsugakumainichitoukou-byte/zatsugaku-v
 - `topics.json` に `{"date", "theme", "format", "style", "voice_preset", "facts":[...], "long_id", "short_id"}` を追記。
 - `scripts/YYYYMMDD.json` と `topics.json` を main にコミットして push（`git -c push.negotiate=true push origin main`）。
 - 最後に、タイトル2本・動画URL2本・扱った雑学の一覧を短く報告する。
+
+## 7. Instagramリール・TikTokへの転載（Metricool、月20投稿を使い切る）
+Metricool（blogId: `8198074`）の無料枠は**月20投稿**。リールとTikTokを別々の投稿として数え、**毎月ちょうど10回ずつ（計20）**、月内に均等に出す。
+1. `getBrandSettings` で instagram と tiktok が接続済みか確認。どちらも未接続ならこの章は飛ばす（片方だけなら、その1つで月20回を目標にする）。
+2. `sns_log.json` から今月の転載回数 `n`（日本時間の暦月）を数える。目標 `N`=10（片方だけなら20）、今日が月の `d` 日目、月の日数 `D` として、**`n < ceil(N × d / D)` のときだけ**今日転載する。`n >= N` なら絶対に転載しない。
+3. 転載する動画は**今日のショート**（`upload-YYYYMMDD` ブランチの `YYYYMMDD_short.mp4` の raw URL）。
+4. `createScheduledPost` を**ネットワークごとに1件ずつ**作る。公開日時は今日の20:00（timezone `Asia/Tokyo`）。
+   - Instagram: providers `[{"network":"instagram"}]`、`instagramData`: `{"type":"REEL","showReelOnFeed":true,"isAiGenerated":true}`。キャプションは2〜3行＋改行＋ハッシュタグ5〜8個（#雑学 #豆知識 ほか内容に合うもの）＋「YouTubeで本編公開中」。
+   - TikTok: providers `[{"network":"tiktok"}]`、`tiktokData`: `{"privacyOption":"PUBLIC_TO_EVERYONE","isAigc":true,"title":"<短いタイトル>"}`。キャプションは1〜2行＋ハッシュタグ3〜5個。
+   - 文面はYouTubeのコピペにせず、各SNS向けに書き分ける。
+5. 投稿上限などのエラーが出たら再試行せず、その旨を記録して報告する。
+6. `sns_log.json` に `{"date","short_id","instagram":true/false,"tiktok":true/false}` を追記して main に push。
