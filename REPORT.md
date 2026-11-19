@@ -12,6 +12,7 @@ GitHubリポジトリ zatsugakumainichitoukou-byte/zatsugaku-videos を追加し
 - Instagramリール（connector: reels）: `IGRE02` 公開日時, `IGRE06` URL, `IGRE23` 再生数, `IGRE10` いいね, `IGRE07` コメント, `IGRE21` シェア, `IGRE12` 保存
 - YouTubeチャンネル全体（connector: evolution）: `YTEV01` 登録者数, `YTEV02` 総再生数, `YTEV05` 登録者増, `YTEV06` 登録者減
 - InstagramとTikTokのフォロワー数・増減も取る。使えるIDが分からなければ `getAnalyticsAvailableMetrics` で各ネットワークの connector `evolution` などを調べる（"Deprecated" と書かれた項目は使わない）。
+- YouTubeの数字はMetricool側への反映が1〜2日遅れることがある。直近の動画の数字が0や空のときは「反映待ちの可能性」と書く。
 - 取得に失敗した項目は推測で埋めず「取得できず」と書く。
 
 ## 3. 保存
