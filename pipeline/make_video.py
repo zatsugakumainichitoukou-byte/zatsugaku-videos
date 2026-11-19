@@ -23,6 +23,35 @@ THEMES = [((255, 214, 165), (255, 173, 173)), ((189, 224, 254), (205, 180, 219))
           ((202, 255, 191), (155, 246, 255)), ((255, 238, 173), (255, 198, 255)),
           ((253, 255, 182), (255, 214, 165)), ((160, 196, 255), (189, 178, 255))]
 
+# ---------- 見た目のスタイル（日替わり） ----------
+STYLES = {
+    "pastel": dict(themes=THEMES, ink=INK, deco="bubbles", cap_fill=(255, 255, 255, 240), cap_ink=INK,
+                   cap_border=None, cap_radius=36, tag_fill=INK, tag_ink=(255, 255, 255), emoji_side="right",
+                   marker=None, bar=INK),
+    "night": dict(themes=[((18, 24, 58), (52, 30, 84)), ((12, 38, 64), (28, 70, 96)), ((40, 20, 60), (80, 30, 70)),
+                          ((10, 40, 50), (20, 80, 80)), ((30, 30, 70), (70, 50, 110)), ((50, 25, 40), (90, 40, 60))],
+                  ink=(255, 255, 255), deco="stars", cap_fill=(10, 10, 30, 190), cap_ink=(255, 255, 255),
+                  cap_border=(255, 214, 102), cap_radius=24, tag_fill=(255, 214, 102), tag_ink=(30, 20, 50),
+                  emoji_side="left", marker=None, bar=(255, 214, 102)),
+    "note": dict(themes=[((252, 248, 236), (246, 238, 214))] * 6, ink=(60, 45, 35), deco="grid",
+                 cap_fill=(255, 255, 255, 250), cap_ink=(60, 45, 35), cap_border=(60, 45, 35), cap_radius=8,
+                 tag_fill=(231, 76, 60), tag_ink=(255, 255, 255), emoji_side="right",
+                 marker=[(255, 236, 110), (170, 230, 255), (255, 190, 200), (190, 240, 170), (255, 210, 150), (220, 200, 255)],
+                 bar=(231, 76, 60)),
+    "pop": dict(themes=[((255, 94, 87), (255, 94, 87)), ((46, 134, 222), (46, 134, 222)), ((16, 172, 132), (16, 172, 132)),
+                        ((243, 104, 224), (243, 104, 224)), ((255, 159, 67), (255, 159, 67)), ((95, 39, 205), (95, 39, 205))],
+                ink=(255, 255, 255), deco="stripes", cap_fill=(255, 235, 59, 255), cap_ink=(20, 20, 20),
+                cap_border=(20, 20, 20), cap_radius=0, tag_fill=(20, 20, 20), tag_ink=(255, 235, 59),
+                emoji_side="left", marker=None, bar=(255, 235, 59)),
+}
+# 声のプリセット（日本語の声は2種類なので、速さと高さで4通りに）
+VOICES = {
+    "nanami": ("ja-JP-NanamiNeural", "+10%", "+0Hz"),
+    "nanami_calm": ("ja-JP-NanamiNeural", "+0%", "-4Hz"),
+    "keita": ("ja-JP-KeitaNeural", "+8%", "+0Hz"),
+    "keita_bright": ("ja-JP-KeitaNeural", "+15%", "+6Hz"),
+}
+
 _fc = {}
 def font(path, size):
     k = (path, size)
@@ -53,7 +82,10 @@ def wrap_ja(text, f, maxw):
         if _probe.textlength(cur + ch, font=f) > maxw and cur:
             if ch in "、。！？」』）ーゃゅょっャュョッぁぃぅぇぉァィゥェォ…":
                 cur += ch; lines.append(cur); cur = ""; continue
-            lines.append(cur); cur = ch
+            if cur[-1] in "「『（":  # 開きかっこを行末に残さない
+                lines.append(cur[:-1]); cur = cur[-1] + ch
+            else:
+                lines.append(cur); cur = ch
         else:
             cur += ch
     if cur: lines.append(cur)
@@ -76,28 +108,31 @@ def text_block(lines, f, lh, align="center", color=INK, width=None):
             d.text((0, lh // 2 + i * lh + 6), l, font=f, fill=color, anchor="lm")
     return im
 
-def caption_box(text, f, lh, maxw, pad=36):
+def caption_box(text, f, lh, maxw, pad=36, st=None):
+    st = st or STYLES["pastel"]
     lines = wrap_ja(text, f, maxw)
-    t = text_block(lines, f, lh)
+    t = text_block(lines, f, lh, color=st["cap_ink"])
     W, H = t.width + pad * 2 + 20, t.height + pad * 2
     box = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     sh = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    ImageDraw.Draw(sh).rounded_rectangle([6, 10, W - 6, H - 2], 36, fill=(60, 30, 80, 60))
+    r = st["cap_radius"]
+    ImageDraw.Draw(sh).rounded_rectangle([6, 10, W - 6, H - 2], r, fill=(30, 20, 40, 70))
     box.alpha_composite(sh.filter(ImageFilter.GaussianBlur(6)))
-    ImageDraw.Draw(box).rounded_rectangle([0, 0, W - 8, H - 10], 36, fill=(255, 255, 255, 240))
+    ImageDraw.Draw(box).rounded_rectangle([0, 0, W - 8, H - 10], r, fill=st["cap_fill"],
+                                          outline=st["cap_border"], width=6 if st["cap_border"] else 0)
     box.alpha_composite(t, ((W - 8 - t.width) // 2, (H - 10 - t.height) // 2))
     return box
 
-def pill(text, f, h):
+def pill(text, f, h, fill=INK, ink=(255, 255, 255)):
     w = int(_probe.textlength(text, font=f)) + h
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    d.rounded_rectangle([0, 0, w - 1, h - 1], h // 2, fill=INK)
-    d.text((w // 2, h // 2), text, font=f, fill=(255, 255, 255), anchor="mm")
+    d.rounded_rectangle([0, 0, w - 1, h - 1], h // 2, fill=fill)
+    d.text((w // 2, h // 2), text, font=f, fill=ink, anchor="mm")
     return im
 
-def make_bg(W, H, theme, seed):
-    """グラデーション＋ゆっくり流れる泡(縦に2画面分)"""
+def make_bg(W, H, theme, seed, deco="bubbles"):
+    """グラデーション＋ゆっくり流れる飾り(縦に2画面分)"""
     c1, c2 = theme
     g = np.linspace(0, 1, H)[:, None]
     arr = (np.array(c1)[None, None] * (1 - g[..., None]) + np.array(c2)[None, None] * g[..., None])
@@ -105,12 +140,29 @@ def make_bg(W, H, theme, seed):
     rnd = random.Random(seed)
     bub = Image.new("RGBA", (W, H * 2), (0, 0, 0, 0))
     d = ImageDraw.Draw(bub)
-    for _ in range(18):
-        r = rnd.randint(30, 160); x = rnd.randint(-50, W + 50); y = rnd.randint(0, H * 2)
-        a = rnd.randint(35, 80)
-        for yy in (y, y - H * 2, y + H * 2):
-            d.ellipse([x - r, yy - r, x + r, yy + r], fill=(255, 255, 255, a))
-    bub = bub.filter(ImageFilter.GaussianBlur(4))
+    if deco == "bubbles":
+        for _ in range(18):
+            r = rnd.randint(30, 160); x = rnd.randint(-50, W + 50); y = rnd.randint(0, H * 2)
+            a = rnd.randint(35, 80)
+            for yy in (y, y - H * 2, y + H * 2):
+                d.ellipse([x - r, yy - r, x + r, yy + r], fill=(255, 255, 255, a))
+        bub = bub.filter(ImageFilter.GaussianBlur(4))
+    elif deco == "stars":
+        for _ in range(140):
+            r = rnd.choice([2, 2, 3, 4, 6]); x = rnd.randint(0, W); y = rnd.randint(0, H * 2)
+            a = rnd.randint(90, 230)
+            for yy in (y, y - H * 2, y + H * 2):
+                d.ellipse([x - r, yy - r, x + r, yy + r], fill=(255, 255, 230, a))
+        bub = bub.filter(ImageFilter.GaussianBlur(1))
+    elif deco == "grid":
+        step = 54
+        for x in range(0, W, step): d.line([(x, 0), (x, H * 2)], fill=(120, 160, 200, 45), width=2)
+        for y in range(0, H * 2, step): d.line([(0, y), (W, y)], fill=(120, 160, 200, 45), width=2)
+        d.line([(110 if W > H else 70, 0), (110 if W > H else 70, H * 2)], fill=(231, 76, 60, 90), width=3)
+    elif deco == "stripes":
+        step = 120
+        for k in range(-H * 2, W + H * 2, step):
+            d.polygon([(k, 0), (k + 50, 0), (k + 50 + H * 2, H * 2), (k + H * 2, H * 2)], fill=(255, 255, 255, 28))
     return base, bub
 
 def ease_out(t):
@@ -135,23 +187,40 @@ def paste(base, im, x, y, a=1.0):
     base.alpha_composite(im, (x, y))
 
 # ---------- レイアウト ----------
-def build_layers(sc, fmt, channel):
-    L = {}
+def build_layers(sc, fmt, channel, st):
+    L = {}; ink = st["ink"]
     if fmt == "short":
-        L["chan"] = text_block([channel], font(FONT_M, 40), 56)
-        L["tag"] = pill(sc["tag"], font(FONT_B, 44), 84) if sc.get("tag") else None
-        L["head"] = text_block(wrap_ja(sc.get("heading", ""), font(FONT_B, 84), 940), font(FONT_B, 84), 110)
+        L["chan"] = text_block([channel], font(FONT_M, 40), 56, color=ink)
+        L["tag"] = pill(sc["tag"], font(FONT_B, 44), 84, st["tag_fill"], st["tag_ink"]) if sc.get("tag") else None
+        L["head"] = heading_block(sc.get("heading", ""), font(FONT_B, 84), 110, 940, "center", st, sc)
         L["emoji"] = emoji_img(sc["emoji"], 400) if sc.get("emoji") else None
-        L["cap"] = caption_box(sc["caption"], font(FONT_B, 60), 88, 860)
+        L["cap"] = caption_box(sc["caption"], font(FONT_B, 60), 88, 860, st=st)
     else:
-        L["chan"] = text_block([channel], font(FONT_M, 34), 48, align="left")
-        L["tag"] = pill(sc["tag"], font(FONT_B, 44), 84) if sc.get("tag") else None
-        L["head"] = text_block(wrap_ja(sc.get("heading", ""), font(FONT_B, 80), 1050), font(FONT_B, 80), 105, align="left")
+        L["chan"] = text_block([channel], font(FONT_M, 34), 48, align="left", color=ink)
+        L["tag"] = pill(sc["tag"], font(FONT_B, 44), 84, st["tag_fill"], st["tag_ink"]) if sc.get("tag") else None
+        L["head"] = heading_block(sc.get("heading", ""), font(FONT_B, 80), 105, 1050, "left", st, sc)
         L["emoji"] = emoji_img(sc["emoji"], 420) if sc.get("emoji") else None
-        L["cap"] = caption_box(sc["caption"], font(FONT_B, 54), 80, 1600)
+        L["cap"] = caption_box(sc["caption"], font(FONT_B, 54), 80, 1600, st=st)
     return L
 
-def render_frame(base_bg, bub, L, fmt, t, T, prog, new_head, new_emoji):
+def heading_block(text, f, lh, maxw, align, st, sc):
+    lines = wrap_ja(text, f, maxw)
+    t = text_block(lines, f, lh, align=align, color=st["ink"])
+    if not st.get("marker"):
+        return t
+    # ノート風: 蛍光ペンの下線
+    m = Image.new("RGBA", t.size, (0, 0, 0, 0)); d = ImageDraw.Draw(m)
+    col = st["marker"][sc.get("theme", 0) % len(st["marker"])]
+    for i, l in enumerate(lines):
+        w = _probe.textlength(l, font=f)
+        x0 = (t.width - w) / 2 if align == "center" else 0
+        y = lh // 2 + i * lh + 6
+        d.rectangle([x0 - 6, y + lh * 0.05, x0 + w + 6, y + lh * 0.38], fill=col + (200,))
+    m.alpha_composite(t)
+    return m
+
+def render_frame(base_bg, bub, L, fmt, t, T, prog, new_head, new_emoji, st=None):
+    st = st or STYLES["pastel"]
     W, H = base_bg.size
     fr = base_bg.copy()
     off = int((t * 40 + prog * 3000) % H)  # 泡がゆっくり上へ
@@ -166,11 +235,13 @@ def render_frame(base_bg, bub, L, fmt, t, T, prog, new_head, new_emoji):
         ecx, ecy = W // 2, 860
         cap_y = 1220
     else:
+        left = st["emoji_side"] == "left"
+        tx = 760 if left else 60
         paste(fr, L["chan"], 60, 40)
         if L["tag"]:
-            paste(fr, L["tag"], 60 - (1 - hk) * 200, 120, hk)
-        paste(fr, L["head"], 60 - (1 - hk) * 200, 240, hk)
-        ecx, ecy = 1480, 400
+            paste(fr, L["tag"], tx - (1 - hk) * 200, 120, hk)
+        paste(fr, L["head"], tx - (1 - hk) * 200, 240, hk)
+        ecx, ecy = (420, 420) if left else (1480, 400)
         cap_y = H - 90 - L["cap"].height + 10
     if L["emoji"]:
         s = back_out(t / 0.5) if new_emoji else 1.0
@@ -187,7 +258,7 @@ def render_frame(base_bg, bub, L, fmt, t, T, prog, new_head, new_emoji):
     d = ImageDraw.Draw(fr)
     by = 0 if fmt == "short" else H - 12
     d.rectangle([0, by, W, by + 12], fill=(255, 255, 255, 120))
-    d.rectangle([0, by, int(W * prog), by + 12], fill=INK)
+    d.rectangle([0, by, int(W * prog), by + 12], fill=st["bar"])
     return fr.convert("RGB")
 
 # ---------- 音声 ----------
@@ -199,17 +270,17 @@ def dur(p):
     return float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                                           "-of", "csv=p=0", p]).strip())
 
-def tts_cached(text, voice, rate, cache):
-    h = hashlib.md5(f"{voice}|{rate}|{text}".encode()).hexdigest()[:12]
+def tts_cached(text, voice, rate, cache, pitch="+0Hz", pause=0.0):
+    h = hashlib.md5(f"{voice}|{rate}|{pitch}|{pause}|{text}".encode()).hexdigest()[:12]
     wav = f"{cache}/{h}.wav"
     if not os.path.exists(wav):
         mp3 = f"{cache}/{h}.mp3"
         for attempt in range(3):
             try:
-                asyncio.run(edge_tts.Communicate(text, voice, rate=rate).save(mp3)); break
+                asyncio.run(edge_tts.Communicate(text, voice, rate=rate, pitch=pitch).save(mp3)); break
             except Exception:
                 if attempt == 2: raise
-        run(["ffmpeg", "-y", "-i", mp3, "-af", "apad=pad_dur=0.4", "-ar", "48000", "-ac", "2", wav])
+        run(["ffmpeg", "-y", "-i", mp3, "-af", f"apad=pad_dur={0.4 + pause:.2f}", "-ar", "48000", "-ac", "2", wav])
     return wav
 
 def make_bgm(seconds, seed, out):
@@ -261,24 +332,25 @@ def render_video(scenes, fmt, s, outdir, name, seed, frames_only=False):
     W, H = (1080, 1920) if fmt == "short" else (1920, 1080)
     work = f"{outdir}/work_{name}"; cache = f"{outdir}/tts"
     os.makedirs(work, exist_ok=True); os.makedirs(cache, exist_ok=True)
-    voice, rate = s.get("voice", "ja-JP-NanamiNeural"), s.get("rate", "+10%")
+    voice, rate, pitch = VOICES[s.get("voice_preset", "nanami")]
+    st = STYLES[s.get("style", "pastel")]
     if frames_only:
         durs = [6.0] * len(scenes); wavs = []
     else:
-        wavs = [tts_cached(sc["say"], voice, rate, cache) for sc in scenes]
+        wavs = [tts_cached(sc["say"], voice, rate, cache, pitch, float(sc.get("pause", 0))) for sc in scenes]
         durs = [dur(w) for w in wavs]
     total = sum(durs); elapsed = 0; parts = []; prev = {}
     for i, (sc, D) in enumerate(zip(scenes, durs)):
-        theme = THEMES[sc.get("theme", i) % len(THEMES)]
-        bg, bub = make_bg(W, H, theme, seed + sc.get("theme", i))
-        L = build_layers(sc, fmt, s["channel"])
+        theme = st["themes"][sc.get("theme", i) % len(st["themes"])]
+        bg, bub = make_bg(W, H, theme, seed + sc.get("theme", i), st["deco"])
+        L = build_layers(sc, fmt, s["channel"], st)
         new_head = sc.get("heading") != prev.get("heading") or sc.get("tag") != prev.get("tag")
         new_emoji = sc.get("emoji") != prev.get("emoji")
         prev = sc
         nfr = int(round(D * FPS))
         if frames_only:
             for tt in (0.15, 2.0):
-                render_frame(bg, bub, L, fmt, tt, D, (elapsed + tt) / total, new_head, new_emoji).save(f"{work}/f{i:02d}_{tt}.jpg", quality=90)
+                render_frame(bg, bub, L, fmt, tt, D, (elapsed + tt) / total, new_head, new_emoji, st).save(f"{work}/f{i:02d}_{tt}.jpg", quality=90)
             elapsed += D; continue
         tmp, mp4 = f"{work}/v{i:02d}.tmp.mp4", f"{work}/v{i:02d}.mp4"
         p = subprocess.Popen(["ffmpeg", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
@@ -286,7 +358,7 @@ def render_video(scenes, fmt, s, outdir, name, seed, frames_only=False):
                               tmp], stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         for k in range(nfr):
             tt = k / FPS
-            p.stdin.write(render_frame(bg, bub, L, fmt, tt, D, (elapsed + tt) / total, new_head, new_emoji).tobytes())
+            p.stdin.write(render_frame(bg, bub, L, fmt, tt, D, (elapsed + tt) / total, new_head, new_emoji, st).tobytes())
         p.stdin.close()
         if p.wait(): raise RuntimeError(f"encode failed scene {i}")
         os.replace(tmp, mp4); parts.append(mp4); elapsed += nfr / FPS
@@ -310,20 +382,22 @@ def render_video(scenes, fmt, s, outdir, name, seed, frames_only=False):
 
 def draw_thumb(s, outdir):
     t = s["thumbnail"]; W, H = 1280, 720
-    bg, bub = make_bg(W, H, THEMES[0], 7)
+    st = STYLES[s.get("style", "pastel")]
+    bg, bub = make_bg(W, H, st["themes"][0], 7, st["deco"])
     fr = bg.copy(); fr.alpha_composite(bub.crop((0, 0, W, H)))
     f = font(FONT_B, 92)
     lines = wrap_ja(t["text"], f, 760)
     d = ImageDraw.Draw(fr)
     y = 120
     if t.get("tag"):
-        paste(fr, pill(t["tag"], font(FONT_B, 40), 76), 60, 40)
+        paste(fr, pill(t["tag"], font(FONT_B, 40), 76, st["tag_fill"], st["tag_ink"]), 60, 40)
+    ink = st["ink"]; edge = (30, 20, 40) if sum(ink) > 600 else (255, 255, 255)
     for l in lines:
         for dx, dy in [(-5, 0), (5, 0), (0, -5), (0, 5), (-4, -4), (4, 4), (-4, 4), (4, -4)]:
-            d.text((60 + dx, y + dy), l, font=f, fill=(255, 255, 255), anchor="lt")
-        d.text((60, y), l, font=f, fill=INK, anchor="lt"); y += 118
+            d.text((60 + dx, y + dy), l, font=f, fill=edge, anchor="lt")
+        d.text((60, y), l, font=f, fill=ink, anchor="lt"); y += 118
     if t.get("sub"):
-        paste(fr, caption_box(t["sub"], font(FONT_B, 46), 64, 700), 50, H - 180)
+        paste(fr, caption_box(t["sub"], font(FONT_B, 46), 64, 700, st=st), 50, H - 180)
     e = emoji_img(t["emoji"], 380)
     paste(fr, e.rotate(-8, expand=True, resample=Image.BICUBIC), 860, 170)
     fr.convert("RGB").save(f"{outdir}/{s['slug']}_thumb.png")

@@ -8,39 +8,51 @@ YouTubeチャンネル「雑学太郎」（チャンネルID: UC5btyvlkpQWNlyMhD
 2. `pip install --break-system-packages -q edge-tts numpy pillow`
 3. `topics.json` を読み、過去に扱ったテーマ・雑学を把握する。
 
-## 1. 台本づくり（毎回いちばん手をかける工程）
+## 1. 日替わりの組み合わせを決める（量産型に見せないため）
+`topics.json` の直近の記録を見て、**前日と同じものを避けて**次の3つを選ぶ（同じ組み合わせが直近7日に無いように）。
+- **見た目** `style`: `pastel` / `night` / `note` / `pop`
+- **声** `voice_preset`: `nanami` / `nanami_calm` / `keita` / `keita_bright`
+- **構成** `format`（直近3日と同じものは避ける）:
+  - `5選` … 「その1〜その5」。各雑学2シーン。
+  - `クイズ` … 「第1問〜第5問」。1シーン目で問題を出し「3秒で考えてみてください」と言い、そのシーンに `"pause": 3` を付ける（captionは問題文だけにする）。2シーン目で「正解は…」と解説。
+  - `ランキング` … 「第5位〜第1位」の順に、意外度などの基準を最初に宣言して紹介。
+  - `本当？ウソ？` … 「1つ目〜5つ目」。それっぽい説を言い、2シーン目で本当かウソかを明かして理由を説明（ウソの説も、世間でよく信じられている誤解に限る。でっち上げはしない）。
+  - `深掘り` … 1つのテーマ（例：「なぜ空は青い？」）を5段階で掘り下げる。tagは「ステップ1〜5」。
+- tag の文言は構成に合わせて変える。`short.segment` はそのtagの値を指定する。
+
+## 2. 台本づくり（毎回いちばん手をかける工程）
 - テーマを1つ決める（食べ物／動物／人体／宇宙／日本語／歴史／生活用品／地理 など。直近7日と同じジャンルは避け、過去と同じ雑学は使わない）。
 - 雑学を5つ選ぶ。**1つずつWebSearchで裏付けを取る**。確認できないもの・俗説・諸説あるものは使わない（使うなら「〜という説があります」と明示）。
 - 医療・お金・事件など繊細な話題、実在の人物の噂話、ネガティブで不快な内容は扱わない。
 - 毎回、冒頭のつかみ・言い回し・タイトルの型を変える。前日までと同じ構成文を使い回さない（YouTubeの「量産型コンテンツ」判定を避けるため）。
 - `scripts/YYYYMMDD.json` を作る。形式は `scripts/food5.json` と同じ:
-  - `slug`: `YYYYMMDD`、`channel`: `雑学太郎`
-  - `scenes`: 導入1＋各雑学2シーン×5＋まとめ1。各シーンに `tag`（"その1"…/"まとめ"）、`theme`（同じtagは同じ番号0〜5）、`heading`（15字前後）、`emoji`（1文字）、`say`（ナレーション。1シーン60〜110字）。
+  - `slug`: `YYYYMMDD`、`channel`: `雑学太郎`、`style`、`voice_preset`、`format`（上で決めたもの）
+  - `scenes`: 導入1＋各ネタ2シーン×5＋まとめ1（深掘りは各ステップ1〜2シーン）。各シーンに `tag`（構成に合わせた文言／"まとめ"）、`theme`（同じtagは同じ番号0〜5）、`heading`（15字前後）、`emoji`（1文字）、`say`（ナレーション。1シーン60〜110字）。
   - `thumbnail`: text（20字以内）, sub, emoji, tag
   - `short`: 5つのうち**いちばん意外な雑学**を `segment` に指定。`hook`（「〜って知ってましたか？」型のつかみ）と `outro`（続きは本編へ誘導）を書く。切り出すパートの1シーン目が「ふたつめは〜」等で始まる場合は `say_short` を付ける。
   - タイトル・説明文・タグ（long と short それぞれ）。説明文の最後に必ず「※この動画はAIツールを使って制作しています。」を入れる。ショートのタイトル末尾に `#雑学 #shorts`。
 
-## 2. 動画の生成
+## 3. 動画の生成
 ```
 python3 pipeline/make_video.py scripts/YYYYMMDD.json out --frames   # 静止画チェック
 ```
-`out/work_long/` と `out/work_short/` のJPGを数枚 Read で目視し、文字のはみ出し・不自然な改行（行頭の「」」「ゃ」など）がないか確認。問題があれば台本の文言を直す。
+`out/work_long/` と `out/work_short/` のJPGを数枚 Read で目視し、文字のはみ出し・不自然な改行（行頭の「」」「ゃ」、行末の「「」など）や、見出しが単語の途中で折り返していないか確認。気になる場合は見出しを短くする。問題があれば台本の文言を直す。
 ```
 python3 pipeline/make_video.py scripts/YYYYMMDD.json out
 ```
 出力: `out/YYYYMMDD_long.mp4`, `out/YYYYMMDD_short.mp4`, `out/YYYYMMDD_thumb.png`
 
-## 3. 公開用URLの用意
+## 4. 公開用URLの用意
 動画ファイルは main に入れない。別ディレクトリで孤立ブランチ `upload-YYYYMMDD` を作り、3ファイルだけをコミットして push する。
 URL: `https://raw.githubusercontent.com/zatsugakumainichitoukou-byte/zatsugaku-videos/upload-YYYYMMDD/<ファイル名>`
 
-## 4. YouTubeへ投稿（Zapier の YouTube: selected_api `YouTubeV4CLIAPI`）
+## 5. YouTubeへ投稿（Zapier の YouTube: selected_api `YouTubeV4CLIAPI`）
 1. 横動画: `upload_video`（privacy_status: public, category_id: "27", default_language/default_audio_language: "ja", made_for_kids: "false"）。返ってきた動画IDを控える。
 2. サムネ: `upload_video_thumbnail`（video_id, thumbnail=サムネURL）。
 3. ショート: `upload_video`（privacy_status: public, made_for_kids: "false"）。説明文の1行目付近に「▶本編はこちら https://www.youtube.com/watch?v=<横動画ID>」を入れる。
 4. 失敗したら1回だけ再試行。それでも失敗したら、そこで止めて内容を報告する。
 
-## 5. 記録
-- `topics.json` に `{"date", "theme", "facts":[...], "long_id", "short_id"}` を追記。
+## 6. 記録
+- `topics.json` に `{"date", "theme", "format", "style", "voice_preset", "facts":[...], "long_id", "short_id"}` を追記。
 - `scripts/YYYYMMDD.json` と `topics.json` を main にコミットして push（`git -c push.negotiate=true push origin main`）。
 - 最後に、タイトル2本・動画URL2本・扱った雑学の一覧を短く報告する。
