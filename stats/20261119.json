@@ -1,1 +1,43 @@
-{"note": "初回テスト（11/19 17時時点）。公開動画はまだなし（テスト2本は非公開）", "youtube": {"subscribers": 0, "views_7d": 0, "videos_published": {"20261118": 2}}, "tiktok": {"rows": 0}, "instagram": {"rows": 0}}
+{
+  "date": "2026-11-19",
+  "collected_at": "2026-11-20T08:50+09:00",
+  "period": {
+    "yesterday": "2026-11-19",
+    "last_7d": "2026-11-13〜2026-11-19"
+  },
+  "note": "YouTubeの動画別数値（再生・高評価・コメント・共有・平均視聴時間）はMetricoolに未反映（null）。反映待ちの可能性。0ではなく取得できずとして扱う。",
+  "totals": {
+    "youtube": {
+      "yesterday": {"views": null, "likes": null, "comments": null, "shares": null, "subs_gained": 0, "subs_lost": 0},
+      "last_7d": {"views": null, "likes": null, "comments": null, "shares": null, "subs_gained": 0, "subs_lost": 0},
+      "subscribers": 0,
+      "channel_total_views": 0,
+      "status": "動画別数値は取得できず（反映待ち）。チャンネル指標（YTEV）も全0で反映待ちの可能性"
+    },
+    "tiktok": {
+      "yesterday": {"views": 0, "likes": 0, "comments": 0, "shares": 0, "followers_gained": 0, "followers_lost": 0, "net_followers": 0},
+      "last_7d": {"views": 0, "likes": 0, "comments": 0, "shares": 0, "followers_gained": 0, "followers_lost": 0, "net_followers": 0},
+      "followers": 0
+    },
+    "instagram": {
+      "yesterday": {"views": 79, "likes": 0, "comments": 0, "shares": 0, "saves": 0, "followers_gained": 0, "followers_lost": 0},
+      "last_7d": {"views": 79, "likes": 0, "comments": 0, "shares": 0, "saves": 0, "followers_gained": 0, "followers_lost": 0},
+      "followers": "取得できず（11/19の値がnull。11/18時点は0）"
+    }
+  },
+  "videos": {
+    "youtube": [
+      {"video_id": "F7CzMLbmHRc", "published": "2026-11-19T09:42:01", "title": "ウォンバットのフン、実はこんな形… #雑学 #shorts", "type": "short", "theme": "動物", "format": "クイズ", "style": "night", "voice_preset": "keita", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null},
+      {"video_id": "q6thwRqgaMg", "published": "2026-11-19T09:41:42", "title": "【全問正解できる？】動物の体のふしぎクイズ5問｜フンが四角い動物って？", "type": "long", "theme": "動物", "format": "クイズ", "style": "night", "voice_preset": "keita", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null},
+      {"video_id": "WY3I9Gp8MTI", "published": "2026-11-18T14:54:42", "title": "イチゴの本当の果実は「つぶつぶ」の方だった #雑学 #shorts", "type": "short", "theme": "食べ物", "format": "5選", "style": "pastel", "voice_preset": "nanami", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null, "memo": "テスト投稿。11/19に公開へ変更"},
+      {"video_id": "2ZQzh88KjYo", "published": "2026-11-18T14:54:17", "title": "【意外】いつもの食べ物、実は○○だった！話したくなる食べ物雑学5選", "type": "long", "theme": "食べ物", "format": "5選", "style": "pastel", "voice_preset": "nanami", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null, "memo": "テスト投稿。11/19に公開へ変更"}
+    ],
+    "tiktok": [
+      {"published": "2026-11-19T11:04:35", "url": "https://www.tiktok.com/@zatsugaku.taro/video/7709836843486907669", "source_short_id": "F7CzMLbmHRc", "views": 0, "likes": 0, "comments": 0, "shares": 0, "full_watch_rate": null}
+    ],
+    "instagram_reels": [
+      {"published": "2026-11-19T11:05:00", "url": "https://www.instagram.com/reel/Df67lailKxX/", "source_short_id": "F7CzMLbmHRc", "views": 79, "likes": 0, "comments": 0, "shares": 0, "saves": 0}
+    ]
+  },
+  "earlier_test": {"note": "初回テスト（11/19 17時時点）。公開動画はまだなし（テスト2本は非公開）", "youtube": {"subscribers": 0, "views_7d": 0, "videos_published": {"20261118": 2}}, "tiktok": {"rows": 0}, "instagram": {"rows": 0}}
+}
