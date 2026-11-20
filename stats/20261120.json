@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-20",
+  "collected_at": "2026-11-21T08:55+09:00",
+  "period": {"yesterday": "2026-11-20", "last_7d": "2026-11-14〜2026-11-20"},
+  "note": "YouTubeの動画別数値（YTVV/YTVP）はMetricoolに未反映（null、all videosは行自体が空）。チャンネル指標（YTEV）も0のまま。反映待ちの可能性のため「取得できず」として扱う。Instagramの日別はIGEV23（リール再生）を使用、動画別はリールの累計値。",
+  "totals": {
+    "youtube": {
+      "yesterday": {"views": null, "likes": null, "comments": null, "shares": null, "subs_gained": 0, "subs_lost": 0, "videos_published": 2},
+      "last_7d": {"views": null, "likes": null, "comments": null, "shares": null, "subs_gained": 0, "subs_lost": 0},
+      "subscribers": 0,
+      "status": "動画別数値は取得できず（反映待ちの可能性）。YTEVは登録者0・総再生0で、こちらも反映待ちの可能性"
+    },
+    "tiktok": {
+      "yesterday": {"views": 0, "likes": 0, "comments": 0, "shares": 0, "followers_gained": 0, "followers_lost": 0, "net_followers": 0},
+      "last_7d": {"views": 0, "likes": 0, "comments": 0, "shares": 0, "followers_gained": 0, "followers_lost": 0, "net_followers": 0},
+      "followers": 0,
+      "status": "2本とも再生0。完全視聴率は取得できず(null)"
+    },
+    "instagram": {
+      "yesterday": {"views": 109, "likes": 0, "comments": 0, "shares": 0, "saves": 0, "followers_gained": 0, "followers_lost": 0},
+      "last_7d": {"views": 218, "likes": 0, "comments": 0, "shares": 0, "saves": 0, "followers_gained": 0, "followers_lost": 0},
+      "followers": "取得できず（IGEV01が11/20はnull、11/18・11/19は0）"
+    }
+  },
+  "comparison": {
+    "instagram_views_vs_prev_day": "109（前日 79→今回再集計で11/19も109）",
+    "instagram_reel_11_19_lifetime": {"20261119_report": 79, "now": 109}
+  },
+  "videos": {
+    "youtube": [
+      {"video_id": "r4rY4h-NFMI", "published": "2026-11-20T09:44:08", "title": "1日が1年より長い星がある… #雑学 #shorts", "type": "short", "theme": "宇宙", "format": "ランキング", "style": "pop", "voice_preset": "nanami_calm", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null},
+      {"video_id": "6OAh1-3Achk", "published": "2026-11-20T09:43:44", "title": "宇宙の意外な事実ランキングTOP5｜1位は「1日が1年より長い星」", "type": "long", "theme": "宇宙", "format": "ランキング", "style": "pop", "voice_preset": "nanami_calm", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null},
+      {"video_id": "F7CzMLbmHRc", "published": "2026-11-19T09:42:01", "title": "ウォンバットのフン、実はこんな形… #雑学 #shorts", "type": "short", "theme": "動物", "format": "クイズ", "style": "night", "voice_preset": "keita", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null},
+      {"video_id": "q6thwRqgaMg", "published": "2026-11-19T09:41:42", "title": "【全問正解できる？】動物の体のふしぎクイズ5問｜フンが四角い動物って？", "type": "long", "theme": "動物", "format": "クイズ", "style": "night", "voice_preset": "keita", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null},
+      {"video_id": "WY3I9Gp8MTI", "published": "2026-11-18T14:54:42", "title": "イチゴの本当の果実は「つぶつぶ」の方だった #雑学 #shorts", "type": "short", "theme": "食べ物", "format": "5選", "style": "pastel", "voice_preset": "nanami", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null},
+      {"video_id": "2ZQzh88KjYo", "published": "2026-11-18T14:54:17", "title": "【意外】いつもの食べ物、実は○○だった！話したくなる食べ物雑学5選", "type": "long", "theme": "食べ物", "format": "5選", "style": "pastel", "voice_preset": "nanami", "views": null, "likes": null, "comments": null, "shares": null, "avg_view_duration": null}
+    ],
+    "tiktok": [
+      {"published": "2026-11-20T11:03:48", "url": "https://www.tiktok.com/@zatsugaku.taro/video/7710207743986109697", "source_short_id": "r4rY4h-NFMI", "theme": "宇宙", "views": 0, "likes": 0, "comments": 0, "shares": 0, "full_watch_rate": null},
+      {"published": "2026-11-19T11:04:35", "url": "https://www.tiktok.com/@zatsugaku.taro/video/7709836843486907669", "source_short_id": "F7CzMLbmHRc", "theme": "動物", "views": 0, "likes": 0, "comments": 0, "shares": 0, "full_watch_rate": null}
+    ],
+    "instagram_reels": [
+      {"published": "2026-11-20T11:08:25", "url": "https://www.instagram.com/reel/Df9gcFljaDc/", "source_short_id": "r4rY4h-NFMI", "theme": "宇宙", "views_lifetime": 109, "likes": 0, "comments": 0, "shares": 0, "saves": 0},
+      {"published": "2026-11-19T11:05:00", "url": "https://www.instagram.com/reel/Df67lailKxX/", "source_short_id": "F7CzMLbmHRc", "theme": "動物", "views_lifetime": 109, "likes": 0, "comments": 0, "shares": 0, "saves": 0}
+    ]
+  }
+}
