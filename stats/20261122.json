@@ -1,0 +1,489 @@
+{
+  "date": "2026-11-22",
+  "collected_at": "2026-11-23T08:49+09:00",
+  "period": {
+    "yesterday": "2026-11-22",
+    "last_7d": "2026-11-16〜2026-11-22",
+    "last_week": "2026-11-16(月)〜2026-11-22(日)"
+  },
+  "note": "REPORT.md更新に合わせ、TikTok/Instagramは動画ごと(TKPO/IGRE)の累計値の合計で集計。『昨日』=昨日公開分の現時点累計、『7日』=期間内公開分の現時点累計の合計。公開日時はMetricoolの14桁をUTCとして published_utc / published_jst に記録（過去ファイルの published は生値のまま）。YouTube動画別(YTVV/YTVP)は今回も数値null、YTVV(all videos)は行自体が空、11/22公開の2本はYTVPにも未登録。YTEV02(総再生)は11/18=253、11/19=932の記録があり以降null。",
+  "totals": {
+    "youtube": {
+      "yesterday": {
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "subs_gained": null,
+        "subs_lost": null,
+        "videos_published": 2
+      },
+      "last_7d": {
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "subs_gained": null,
+        "subs_lost": null,
+        "videos_published": 10
+      },
+      "subscribers": 0,
+      "channel_total_views_last_known": {
+        "date": "2026-11-19",
+        "value": 932
+      },
+      "status": "動画別・登録者増減は取得できず（反映待ちの可能性。11/18公開分も5日経っても未反映）"
+    },
+    "tiktok": {
+      "yesterday": {
+        "views": 22,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "followers_gained": 0,
+        "followers_lost": 0,
+        "net_followers": 0
+      },
+      "last_7d": {
+        "views": 157,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "followers_gained": 0,
+        "followers_lost": 0,
+        "net_followers": 0,
+        "followers_gained_note": "TKEV16/17は11/22のみ0、それ以前はnull"
+      },
+      "followers": 0,
+      "status": "完全視聴率(TKPO13)は取得できず(null)。TKEV12(期間内再生)は0表示で動画別と食い違い。11/19・11/20投稿は4日経っても0再生"
+    },
+    "instagram": {
+      "yesterday": {
+        "views": 113,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0,
+        "followers_gained": 0,
+        "followers_lost": 0
+      },
+      "last_7d": {
+        "views": 462,
+        "likes": 1,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0,
+        "followers_gained": null,
+        "followers_lost": null,
+        "followers_note": "IGEV43/44は11/22のみ0、それ以前はnull"
+      },
+      "followers": "取得できず（IGEV01が11/22はnull、11/18〜11/21は0）"
+    }
+  },
+  "comparison": {
+    "first_day_views": {
+      "instagram": {
+        "11/19動物": 79,
+        "11/20宇宙": 109,
+        "11/21地理": 131,
+        "11/22生活用品": 113
+      },
+      "tiktok": {
+        "11/19動物": 0,
+        "11/20宇宙": 0,
+        "11/21地理": 70,
+        "11/22生活用品": 22
+      }
+    },
+    "vs_prev_day_yesterday_views": {
+      "instagram": {
+        "now": 113,
+        "prev": 131
+      },
+      "tiktok": {
+        "now": 22,
+        "prev": 70
+      }
+    },
+    "last_7d_vs_prev_report": {
+      "instagram_views": {
+        "now": 462,
+        "20261121_report": 349
+      },
+      "tiktok_views": {
+        "now": 157,
+        "20261121_report": 70
+      }
+    },
+    "growth_since_prev_report": {
+      "tiktok_11/21地理": {
+        "prev": 70,
+        "now": 135
+      },
+      "instagram_11/21地理": {
+        "prev": 131,
+        "now": 131
+      }
+    },
+    "prev_week": "前週(11/9〜11/15)は投稿なし・記録なしのため前週比なし"
+  },
+  "weekly_review": {
+    "youtube_videos": 10,
+    "instagram_reels": 4,
+    "tiktok_posts": 4,
+    "short_avg_views_by_condition_IG_TK": {
+      "note": "各条件1〜2本のみ。傾向の芽として扱う",
+      "format": {
+        "本当？ウソ？": {
+          "ig": 131,
+          "tk": 135,
+          "n": 1
+        },
+        "5選": {
+          "ig": 113,
+          "tk": 22,
+          "n": 1
+        },
+        "ランキング": {
+          "ig": 109,
+          "tk": 0,
+          "n": 1
+        },
+        "クイズ": {
+          "ig": 109,
+          "tk": 0,
+          "n": 1
+        }
+      },
+      "style": {
+        "note": {
+          "ig": 131,
+          "tk": 135,
+          "n": 1
+        },
+        "night": {
+          "ig": 111,
+          "tk": 11,
+          "n": 2
+        },
+        "pop": {
+          "ig": 109,
+          "tk": 0,
+          "n": 1
+        }
+      },
+      "voice_preset": {
+        "keita_bright": {
+          "ig": 131,
+          "tk": 135,
+          "n": 1
+        },
+        "nanami": {
+          "ig": 113,
+          "tk": 22,
+          "n": 1
+        },
+        "nanami_calm": {
+          "ig": 109,
+          "tk": 0,
+          "n": 1
+        },
+        "keita": {
+          "ig": 109,
+          "tk": 0,
+          "n": 1
+        }
+      }
+    }
+  },
+  "videos": {
+    "youtube": [
+      {
+        "video_id": "t6gcZnX_hL4",
+        "published_utc": null,
+        "published_jst": null,
+        "title": null,
+        "type": "short",
+        "theme": "生活用品",
+        "format": "5選",
+        "style": "night",
+        "voice_preset": "nanami",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null,
+        "status": "Metricoolに未登録（行なし）。反映待ちの可能性"
+      },
+      {
+        "video_id": "98XduPh3up0",
+        "published_utc": null,
+        "published_jst": null,
+        "title": null,
+        "type": "long",
+        "theme": "生活用品",
+        "format": "5選",
+        "style": "night",
+        "voice_preset": "nanami",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null,
+        "status": "Metricoolに未登録（行なし）。反映待ちの可能性"
+      },
+      {
+        "video_id": "nhLYp58ZykA",
+        "published_utc": "2026-11-21T09:42:40Z",
+        "published_jst": "2026-11-21T18:42:40+09:00",
+        "title": "オーストラリアの横幅は月より長い…？ #雑学 #shorts",
+        "type": "short",
+        "theme": "地理",
+        "format": "本当？ウソ？",
+        "style": "note",
+        "voice_preset": "keita_bright",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "9Hm7wkL90x0",
+        "published_utc": "2026-11-21T09:42:13Z",
+        "published_jst": "2026-11-21T18:42:13+09:00",
+        "title": "【本当？ウソ？】万里の長城は宇宙から見える？地理の5つの説を検証",
+        "type": "long",
+        "theme": "地理",
+        "format": "本当？ウソ？",
+        "style": "note",
+        "voice_preset": "keita_bright",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "r4rY4h-NFMI",
+        "published_utc": "2026-11-20T09:44:08Z",
+        "published_jst": "2026-11-20T18:44:08+09:00",
+        "title": "1日が1年より長い星がある… #雑学 #shorts",
+        "type": "short",
+        "theme": "宇宙",
+        "format": "ランキング",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "6OAh1-3Achk",
+        "published_utc": "2026-11-20T09:43:44Z",
+        "published_jst": "2026-11-20T18:43:44+09:00",
+        "title": "宇宙の意外な事実ランキングTOP5｜1位は「1日が1年より長い星」",
+        "type": "long",
+        "theme": "宇宙",
+        "format": "ランキング",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "F7CzMLbmHRc",
+        "published_utc": "2026-11-19T09:42:01Z",
+        "published_jst": "2026-11-19T18:42:01+09:00",
+        "title": "ウォンバットのフン、実はこんな形… #雑学 #shorts",
+        "type": "short",
+        "theme": "動物",
+        "format": "クイズ",
+        "style": "night",
+        "voice_preset": "keita",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "q6thwRqgaMg",
+        "published_utc": "2026-11-19T09:41:42Z",
+        "published_jst": "2026-11-19T18:41:42+09:00",
+        "title": "【全問正解できる？】動物の体のふしぎクイズ5問｜フンが四角い動物って？",
+        "type": "long",
+        "theme": "動物",
+        "format": "クイズ",
+        "style": "night",
+        "voice_preset": "keita",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "WY3I9Gp8MTI",
+        "published_utc": "2026-11-18T14:54:42Z",
+        "published_jst": "2026-11-18T23:54:42+09:00",
+        "title": "イチゴの本当の果実は「つぶつぶ」の方だった #雑学 #shorts",
+        "type": "short",
+        "theme": "食べ物",
+        "format": "5選",
+        "style": "pastel",
+        "voice_preset": "nanami",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "2ZQzh88KjYo",
+        "published_utc": "2026-11-18T14:54:17Z",
+        "published_jst": "2026-11-18T23:54:17+09:00",
+        "title": "【意外】いつもの食べ物、実は○○だった！話したくなる食べ物雑学5選",
+        "type": "long",
+        "theme": "食べ物",
+        "format": "5選",
+        "style": "pastel",
+        "voice_preset": "nanami",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      }
+    ],
+    "tiktok": [
+      {
+        "published_utc": "2026-11-22T11:04:31Z",
+        "published_jst": "2026-11-22T20:04:31+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7710950094555614484",
+        "source_short_id": "t6gcZnX_hL4",
+        "theme": "生活用品",
+        "format": "5選",
+        "style": "night",
+        "voice_preset": "nanami",
+        "views": 22,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-21T11:04:42Z",
+        "published_jst": "2026-11-21T20:04:42+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7710579035369245960",
+        "source_short_id": "nhLYp58ZykA",
+        "theme": "地理",
+        "format": "本当？ウソ？",
+        "style": "note",
+        "voice_preset": "keita_bright",
+        "views": 135,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-20T11:03:48Z",
+        "published_jst": "2026-11-20T20:03:48+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7710207743986109697",
+        "source_short_id": "r4rY4h-NFMI",
+        "theme": "宇宙",
+        "format": "ランキング",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "views": 0,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-19T11:04:35Z",
+        "published_jst": "2026-11-19T20:04:35+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7709836843486907669",
+        "source_short_id": "F7CzMLbmHRc",
+        "theme": "動物",
+        "format": "クイズ",
+        "style": "night",
+        "voice_preset": "keita",
+        "views": 0,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      }
+    ],
+    "instagram_reels": [
+      {
+        "published_utc": "2026-11-22T11:07:25Z",
+        "published_jst": "2026-11-22T20:07:25+09:00",
+        "url": "https://www.instagram.com/reel/DgCqAgeiZry/",
+        "source_short_id": "t6gcZnX_hL4",
+        "theme": "生活用品",
+        "format": "5選",
+        "style": "night",
+        "voice_preset": "nanami",
+        "views_lifetime": 113,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-21T11:05:11Z",
+        "published_jst": "2026-11-21T20:05:11+09:00",
+        "url": "https://www.instagram.com/reel/DgAFMhnkcN_/",
+        "source_short_id": "nhLYp58ZykA",
+        "theme": "地理",
+        "format": "本当？ウソ？",
+        "style": "note",
+        "voice_preset": "keita_bright",
+        "views_lifetime": 131,
+        "likes": 1,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-20T11:08:25Z",
+        "published_jst": "2026-11-20T20:08:25+09:00",
+        "url": "https://www.instagram.com/reel/Df9gcFljaDc/",
+        "source_short_id": "r4rY4h-NFMI",
+        "theme": "宇宙",
+        "format": "ランキング",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "views_lifetime": 109,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-19T11:05:00Z",
+        "published_jst": "2026-11-19T20:05:00+09:00",
+        "url": "https://www.instagram.com/reel/Df67lailKxX/",
+        "source_short_id": "F7CzMLbmHRc",
+        "theme": "動物",
+        "format": "クイズ",
+        "style": "night",
+        "voice_preset": "keita",
+        "views_lifetime": 109,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      }
+    ]
+  }
+}
