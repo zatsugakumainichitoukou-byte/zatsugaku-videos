@@ -79,5 +79,21 @@
     ],
     "long_id": "98XduPh3up0",
     "short_id": "t6gcZnX_hL4"
+  },
+  {
+    "date": "2026-11-23",
+    "theme": "人体",
+    "format": "クイズ",
+    "style": "pastel",
+    "voice_preset": "keita_bright",
+    "long_id": "mBaMJ6IU6t4",
+    "short_id": "LyjCiUMKxnc",
+    "facts": [
+      "新生児は約300個の骨があり成長で癒合して大人は約206個",
+      "体で最小の骨はアブミ骨（耳の奥・約3mm、鐙に由来）",
+      "手の爪は1日約0.1mm伸び、足の爪はその半分ほど",
+      "一卵性双生児でも指紋は同一ではない（胎内環境の差）",
+      "角膜は血管がなく涙に溶けた空気中の酸素を取り込む"
+    ]
   }
 ]
