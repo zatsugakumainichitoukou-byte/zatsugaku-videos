@@ -30,6 +30,7 @@ YouTubeチャンネル「雑学太郎」（チャンネルID: UC5btyvlkpQWNlyMhD
   - `scenes`: 導入1＋各ネタ2シーン×5＋まとめ1（深掘りは各ステップ1〜2シーン）。各シーンに `tag`（構成に合わせた文言／"まとめ"）、`theme`（同じtagは同じ番号0〜5）、`heading`（15字前後）、`emoji`（1文字）、`say`（ナレーション。1シーン60〜110字）。
   - `thumbnail`: text（20字以内）, sub, emoji, tag
   - `short`: 5つのうち**いちばん意外な雑学**を `segment` に指定。`hook`（「〜って知ってましたか？」型のつかみ）と `outro`（続きは本編へ誘導）を書く。切り出すパートの1シーン目が「ふたつめは〜」等で始まる場合は `say_short` を付ける。
+  - 「まとめ」シーンの呼びかけはYouTube・TikTok共通で使うので、「チャンネル登録」「フォロー」など特定のSNSの言葉は使わない（例：「毎日ひとつ雑学をお届けしています。また明日！」）。
   - タイトル・説明文・タグ（long と short それぞれ）。説明文の最後に必ず「※この動画はAIツールを使って制作しています。」を入れる。ショートのタイトル末尾に `#雑学 #shorts`。
 
 ## 3. 動画の生成
@@ -40,10 +41,11 @@ python3 pipeline/make_video.py scripts/YYYYMMDD.json out --frames   # 静止画�
 ```
 python3 pipeline/make_video.py scripts/YYYYMMDD.json out
 ```
-出力: `out/YYYYMMDD_long.mp4`, `out/YYYYMMDD_short.mp4`, `out/YYYYMMDD_thumb.png`
+出力: `out/YYYYMMDD_long.mp4`, `out/YYYYMMDD_short.mp4`, `out/YYYYMMDD_tiktok.mp4`（本編と同じ内容の縦型・TikTok用）, `out/YYYYMMDD_thumb.png`
+- TikTok版は収益化（Creator Rewards）の対象になるよう**必ず61秒以上**にする。WARNINGが出たら台本のシーンを足して作り直す。
 
 ## 4. 公開用URLの用意
-動画ファイルは main に入れない。別ディレクトリで孤立ブランチ `upload-YYYYMMDD` を作り、3ファイルだけをコミットして push する。
+動画ファイルは main に入れない。別ディレクトリで孤立ブランチ `upload-YYYYMMDD` を作り、4ファイル（long / short / tiktok / thumb）だけをコミットして push する。
 URL: `https://raw.githubusercontent.com/zatsugakumainichitoukou-byte/zatsugaku-videos/upload-YYYYMMDD/<ファイル名>`
 
 ## 5. YouTubeへ投稿（Zapier の YouTube: selected_api `YouTubeV4CLIAPI`）
@@ -61,10 +63,10 @@ URL: `https://raw.githubusercontent.com/zatsugakumainichitoukou-byte/zatsugaku-v
 Metricool（blogId: `8198074`）の無料枠は**月20投稿**。リールとTikTokを別々の投稿として数え、**毎月ちょうど10回ずつ（計20）**、月内に均等に出す。
 1. `getBrandSettings` で instagram と tiktok が接続済みか確認。どちらも未接続ならこの章は飛ばす（片方だけなら、その1つで月20回を目標にする）。
 2. `sns_log.json` から今月の転載回数 `n`（日本時間の暦月）を数える。目標 `N`=10（片方だけなら20）、今日が月の `d` 日目、月の日数 `D` として、**`n < ceil(N × d / D)` のときだけ**今日転載する。`n >= N` なら絶対に転載しない。
-3. 転載する動画は**今日のショート**（`upload-YYYYMMDD` ブランチの `YYYYMMDD_short.mp4` の raw URL）。
+3. 転載する動画は、**Instagramは今日のショート**（`YYYYMMDD_short.mp4`）、**TikTokは今日のTikTok版**（`YYYYMMDD_tiktok.mp4`、本編と同じ内容の縦型・1分以上）。どちらも `upload-YYYYMMDD` ブランチの raw URL。
 4. `createScheduledPost` を**ネットワークごとに1件ずつ**作る。公開日時は今日の20:00（timezone `Asia/Tokyo`）。
    - Instagram: providers `[{"network":"instagram"}]`、`instagramData`: `{"type":"REEL","showReelOnFeed":true,"isAiGenerated":true}`。キャプションは2〜3行＋改行＋ハッシュタグ5〜8個（#雑学 #豆知識 ほか内容に合うもの）＋「YouTubeで本編公開中」。
-   - TikTok: providers `[{"network":"tiktok"}]`、`tiktokData`: `{"privacyOption":"PUBLIC_TO_EVERYONE","isAigc":true,"title":"<短いタイトル>"}`。キャプションは1〜2行＋ハッシュタグ3〜5個。
+   - TikTok: providers `[{"network":"tiktok"}]`、`tiktokData`: `{"privacyOption":"PUBLIC_TO_EVERYONE","isAigc":true,"title":"<短いタイトル>"}`。キャプションは1〜2行（雑学5つが入ったフル版だと分かるように）＋ハッシュタグ3〜5個。
    - 文面はYouTubeのコピペにせず、各SNS向けに書き分ける。
 5. 投稿上限などのエラーが出たら再試行せず、その旨を記録して報告する。
 6. `sns_log.json` に `{"date","short_id","instagram":true/false,"tiktok":true/false}` を追記して main に push。

@@ -417,6 +417,13 @@ def main(path, outdir, frames_only=False):
               [dict(sh["outro"], tag=sh.get("tag", "今日の雑学"), theme=seg[0].get("theme", 0))]
     for sc in sscenes: sc.setdefault("caption", sc["say"])
     render_video(sscenes, "short", s, outdir, "short", seed + 1, frames_only)
+    # TikTok用（縦・本編の全編。収益化対象の1分以上にする）
+    if not SHORT_ONLY and not s.get("no_tiktok"):
+        render_video([dict(sc) for sc in s["scenes"]], "short", s, outdir, "tiktok", seed + 2, frames_only)
+        if not frames_only:
+            tl = dur(f"{outdir}/{s['slug']}_tiktok.mp4")
+            if tl < 61:
+                print(f"WARNING: tiktok version is {tl:.1f}s (<61s). 台本を足して1分以上にすること")
     if frames_only: return
     draw_thumb(s, outdir)
     meta = {"long": {k: s[k] for k in ("title", "description", "tags")},
