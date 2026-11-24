@@ -379,6 +379,7 @@ def render_video(scenes, fmt, s, outdir, name, seed, frames_only=False):
          "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", final + ".tmp.mp4"])
     os.replace(final + ".tmp.mp4", final)
     print(final, round(dur(final), 1), "sec")
+    return durs
 
 def draw_thumb(s, outdir):
     t = s["thumbnail"]; W, H = 1280, 720
@@ -407,7 +408,8 @@ def main(path, outdir, frames_only=False):
     seed = int(hashlib.md5(s["slug"].encode()).hexdigest()[:6], 16)
     for sc in s["scenes"]: sc.setdefault("caption", sc["say"])
     # 本編(横)
-    if not SHORT_ONLY: render_video(s["scenes"], "long", s, outdir, "long", seed, frames_only)
+    long_durs = None
+    if not SHORT_ONLY: long_durs = render_video(s["scenes"], "long", s, outdir, "long", seed, frames_only)
     # ショート(縦) = 本編の1パートを切り出し＋冒頭フック＋本編への誘導
     sh = s["short"]
     seg = [dict(sc, tag=sh.get("tag", "今日の雑学"), say=sc.get("say_short", sc["say"]),
@@ -419,7 +421,10 @@ def main(path, outdir, frames_only=False):
     render_video(sscenes, "short", s, outdir, "short", seed + 1, frames_only)
     # TikTok用（縦・本編の全編。収益化対象の1分以上にする）
     if not SHORT_ONLY and not s.get("no_tiktok"):
-        render_video([dict(sc) for sc in s["scenes"]], "short", s, outdir, "tiktok", seed + 2, frames_only)
+        tags = s.get("tiktok_tags")
+        tsc = [dict(sc) for i, sc in enumerate(s["scenes"])
+               if not tags or i == 0 or sc.get("tag") in tags or sc.get("tag") == "まとめ"]
+        render_video(tsc, "short", s, outdir, "tiktok", seed + 2, frames_only)
         if not frames_only:
             tl = dur(f"{outdir}/{s['slug']}_tiktok.mp4")
             if tl < 61:
@@ -428,6 +433,26 @@ def main(path, outdir, frames_only=False):
     draw_thumb(s, outdir)
     meta = {"long": {k: s[k] for k in ("title", "description", "tags")},
             "short": {k: sh[k] for k in ("title", "description", "tags")}}
+    if long_durs:
+        # YouTubeのチャプター（タグが変わる所ごと。0:00から始め、各10秒以上）
+        t, last, chapters = 0.0, None, []
+        names = s.get("chapter_names", {})
+        for sc, d in zip(s["scenes"], long_durs):
+            tag = sc.get("tag") or ""
+            if tag != last:
+                label = names.get(tag) or (tag + "：" + sc.get("heading", "") if tag not in ("まとめ",) else "まとめ")
+                if chapters and t - chapters[-1][0] < 10:
+                    chapters[-1] = (chapters[-1][0], chapters[-1][1])
+                else:
+                    chapters.append((t, label))
+                last = tag
+            t += round(d * FPS) / FPS
+        if chapters: chapters[0] = (0.0, names.get("_intro", "オープニング"))
+        fmt = lambda x: f"{int(x // 60)}:{int(x % 60):02d}"
+        meta["long"]["chapters"] = "\n".join(f"{fmt(a)} {b}" for a, b in chapters)
+        meta["long"]["seconds"] = round(t, 1)
+        if t < 480:
+            print(f"WARNING: long version is {t:.0f}s (<8min). 雑学やシーンを足して8分以上にすること")
     json.dump(meta, open(f"{outdir}/{s['slug']}_meta.json", "w"), ensure_ascii=False, indent=2)
 
 SHORT_ONLY = "--short-only" in sys.argv
