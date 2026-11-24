@@ -194,7 +194,10 @@ def build_layers(sc, fmt, channel, st):
         L["tag"] = pill(sc["tag"], font(FONT_B, 44), 84, st["tag_fill"], st["tag_ink"]) if sc.get("tag") else None
         L["head"] = heading_block(sc.get("heading", ""), font(FONT_B, 84), 110, 940, "center", st, sc)
         L["emoji"] = emoji_img(sc["emoji"], 400) if sc.get("emoji") else None
-        L["cap"] = caption_box(sc["caption"], font(FONT_B, 60), 88, 860, st=st)
+        # 縦型は字幕が長いと画面下にはみ出すので、収まるまで文字を小さくする
+        for fs, lh in ((60, 88), (54, 78), (48, 70), (44, 64)):
+            L["cap"] = caption_box(sc["caption"], font(FONT_B, fs), lh, 860 + (60 - fs) * 4, st=st)
+            if L["cap"].height <= 640: break
     else:
         L["chan"] = text_block([channel], font(FONT_M, 34), 48, align="left", color=ink)
         L["tag"] = pill(sc["tag"], font(FONT_B, 44), 84, st["tag_fill"], st["tag_ink"]) if sc.get("tag") else None
@@ -233,7 +236,7 @@ def render_frame(base_bg, bub, L, fmt, t, T, prog, new_head, new_emoji, st=None)
             paste(fr, L["tag"], (W - L["tag"].width) // 2, y, hk); y += 110
         paste(fr, L["head"], (W - L["head"].width) // 2 - (1 - hk) * 120, y, hk)
         ecx, ecy = W // 2, 860
-        cap_y = 1220
+        cap_y = min(1220, H - 50 - L["cap"].height)
     else:
         left = st["emoji_side"] == "left"
         tx = 760 if left else 60
