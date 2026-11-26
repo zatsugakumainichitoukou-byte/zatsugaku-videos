@@ -9,6 +9,7 @@ YouTubeチャンネル「雑学太郎」（チャンネルID: UC5btyvlkpQWNlyMhD
 3. `topics.json` を読み、過去に扱ったテーマ・雑学を把握する。
 
 ## 1. 日替わりの組み合わせを決める（量産型に見せないため）
+- `tuning.json` の重み（毎週のデータで自動調整される）に比例して選ぶ。重みの高いものほど多く使うが、下の「前日と同じものを避ける」ルールのほうを優先する。`title_tips` があればタイトル・つかみに反映する。ジャンルも `tuning.json` の `genre` の重みで選ぶ（ここにないジャンルも時々は試してよい）。
 `topics.json` の直近の記録を見て、**前日と同じものを避けて**次の3つを選ぶ（同じ組み合わせが直近7日に無いように）。
 - **見た目** `style`: `pastel` / `night` / `note` / `pop`
 - **声** `voice_preset`: `nanami` / `nanami_calm` / `keita` / `keita_bright`
