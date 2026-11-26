@@ -70,7 +70,7 @@ Metricoolは予約時に動画を自社サーバーへコピーするので、Gi
 有料プラン（Starter）なので投稿数の上限はない。**毎日**両方に出す。
 1. `getBrandSettings` で instagram と tiktok が接続済みか確認。未接続のネットワークは飛ばす。
 2. 使う動画は、**Instagramは今日のショート**（`YYYYMMDD_short.mp4`）、**TikTokは今日のTikTok版**（`YYYYMMDD_tiktok.mp4`、厳選3パートの縦型・1分以上）。どちらも `upload-YYYYMMDD` ブランチの raw URL。
-3. `createScheduledPost` を**ネットワークごとに1件ずつ**作る。公開日時は今日の **20:00**（timezone `Asia/Tokyo`）。
+3. `createScheduledPost` を**ネットワークごとに1件ずつ**作る。公開日時は今日の **19:10**（YouTubeのショートの直後。timezone `Asia/Tokyo`。すでに過ぎていたら今から5分後）。
    - Instagram: providers `[{"network":"instagram"}]`、`instagramData`: `{"type":"REEL","showReelOnFeed":true,"isAiGenerated":true}`。キャプションは2〜3行＋改行＋ハッシュタグ5〜8個（#雑学 #豆知識 ほか内容に合うもの）＋「YouTubeで本編公開中」。
    - TikTok: providers `[{"network":"tiktok"}]`、`tiktokData`: `{"privacyOption":"PUBLIC_TO_EVERYONE","isAigc":true,"title":"<短いタイトル>"}`。キャプションは1〜2行（本編から選りすぐった3つの雑学だと分かるように）＋ハッシュタグ3〜5個。
    - 文面はYouTubeのコピペにせず、各SNS向けに書き分ける。
