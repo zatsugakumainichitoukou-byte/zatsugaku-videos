@@ -58,8 +58,9 @@ Metricoolは予約時に動画を自社サーバーへコピーするので、Gi
    - `text`: 説明文。`out/YYYYMMDD_meta.json` の `long.chapters` を「■目次」の見出しの下にそのまま貼る（YouTubeが自動で目次にする）。最後に「※この動画はAIツールを使って制作しています。」
    - `youtubeData`: `{"title": "<タイトル>", "type": "video", "privacy": "public", "tags": [...], "category": "EDUCATION", "madeForKids": false, "isAiGeneratedContent": false}`
 2. **ショート**：公開日時は今日の **19:05**。`media`: ショートのraw URL。`youtubeData` の `type` は `"short"`、ほかは同じ（サムネは付けない）。説明文の1行目付近に「▶本編（フル版）はこちら https://www.youtube.com/channel/UC5btyvlkpQWNlyMhDj2I6Rg/videos」を入れる。
-3. 返ってきた `uuid` と `plannerUrl` を控える。エラーが出たら1回だけ再試行し、それでも失敗したらそこで止めて報告する。
-4. 予約したら作業を終えてよい（公開はMetricoolが行う）。翌日のレポートで公開を確認する。
+3. 横動画・ショートとも `firstCommentText` に、チャンネルからの最初のコメントを入れる（あとで毛糸さんが手で「固定」する）。横動画は「どの雑学がいちばん意外でしたか？番号でコメントしてね！」のような、答えやすい問いかけ。ショートは「この続きと残り9個の雑学は本編で▶ https://www.youtube.com/channel/UC5btyvlkpQWNlyMhDj2I6Rg/videos」。もし `firstCommentText` 付きでエラーになったら、外して予約し直し、報告に書く。
+4. 返ってきた `uuid` と `plannerUrl` を控える。エラーが出たら1回だけ再試行し、それでも失敗したらそこで止めて報告する。
+5. 予約したら作業を終えてよい（公開はMetricoolが行う）。翌日のレポートで公開を確認する。
 
 ## 6. 記録
 - `topics.json` に `{"date", "theme", "format", "style", "voice_preset", "facts":[...], "long_title", "short_title", "metricool_uuids":[...]}（YouTubeの動画IDは予約時点では分からないので、タイトルで記録する）` を追記。
