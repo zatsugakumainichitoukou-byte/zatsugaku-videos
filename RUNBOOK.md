@@ -74,8 +74,8 @@ Metricoolは予約時に動画を自社サーバーへコピーするので、Gi
 3. `createScheduledPost` を**ネットワークごとに1件ずつ**作る。公開日時は今日の **19:10**（YouTubeのショートの直後。timezone `Asia/Tokyo`。すでに過ぎていたら今から5分後）。
    - Instagram: providers `[{"network":"instagram"}]`、`instagramData`: `{"type":"REEL","showReelOnFeed":true,"isAiGenerated":true}`。キャプションは2〜3行＋改行＋ハッシュタグ5〜8個（#雑学 #豆知識 ほか内容に合うもの）＋「YouTubeで本編公開中」。
    - TikTok: providers `[{"network":"tiktok"}]`、`tiktokData`: `{"privacyOption":"PUBLIC_TO_EVERYONE","isAigc":true,"title":"<短いタイトル>"}`。キャプションは1〜2行（本編から選りすぐった3つの雑学だと分かるように）＋ハッシュタグ3〜5個。
-   - Instagramは `firstCommentText` に「答えがわかった人はコメントで教えてね！」のような答えやすい問いかけを入れる（あとで毛糸さんが手で固定する）。エラーになったら外して予約し直し、報告に書く。
-   - TikTokは外部からコメントを付けられないので、キャプションの最後に問いかけ（例：「知ってた人はコメントで🙋」）を入れる。
+   - Instagramは `firstCommentText` に「答えがわかった人はコメントで教えてね！」のような答えやすい問いかけを入れる（あとで毛糸さんが手で固定する）。エラーになったら外して予約し直し、**報告の最後に「Instagramに投稿するコメント」としてその文面を書く**（毛糸さんが手で投稿・固定する）。
+   - TikTokは外部からコメントを付けられないので、**毛糸さんが手で投稿・固定する**。その日のTikTok版に合ったコメント文（答えやすい問いかけ。1〜2行、絵文字1つ程度、URLは入れない）を作り、**報告の最後に「TikTokに投稿するコメント」としてそのまま貼れる形で書く**。
    - 文面はYouTubeのコピペにせず、各SNS向けに書き分ける。
 4. エラーが出たら1回だけ再試行し、それでも失敗したら記録して報告する。
 5. `sns_log.json` に `{"date","instagram":true/false,"tiktok":true/false}` を追記して main に push。
