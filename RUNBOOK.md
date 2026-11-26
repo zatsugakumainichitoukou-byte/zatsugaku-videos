@@ -51,27 +51,28 @@ python3 pipeline/make_video.py scripts/YYYYMMDD.json out
 動画ファイルは main に入れない。別ディレクトリで孤立ブランチ `upload-YYYYMMDD` を作り、4ファイル（long / short / tiktok / thumb）だけをコミットして push する。
 URL: `https://raw.githubusercontent.com/zatsugakumainichitoukou-byte/zatsugaku-videos/upload-YYYYMMDD/<ファイル名>`
 
-## 5. YouTubeへ投稿（Zapier の YouTube: selected_api `YouTubeV4CLIAPI`）
-0. 日本時間18:55より前に準備ができたら、`sleep` で18:55まで待ってから投稿する（公開を19時ごろにそろえるため）。
-1. 横動画: `upload_video`（privacy_status: public, category_id: "27", default_language/default_audio_language: "ja", made_for_kids: "false"）。返ってきた動画IDを控える。
-2. サムネ: `upload_video_thumbnail`（video_id, thumbnail=サムネURL）。
-   - 横動画の説明文には、`out/YYYYMMDD_meta.json` の `long.chapters`（チャプター）を「■目次」の見出しの下にそのまま貼る（YouTubeが自動で目次にする）。
-3. ショート: `upload_video`（privacy_status: public, made_for_kids: "false"）。説明文の1行目付近に「▶本編はこちら https://www.youtube.com/watch?v=<横動画ID>」を入れる。
-4. 失敗したら1回だけ再試行。それでも失敗したら、そこで止めて内容を報告する。
+## 5. YouTubeへ投稿予約（Metricool。blogId `8198074`、`createScheduledPost`）
+Metricoolは予約時に動画を自社サーバーへコピーするので、GitHubのURLは予約の時点で読めればよい。Zapierはもう使わない。
+1. **横動画**：公開日時は今日の **19:00**（timezone `Asia/Tokyo`。すでに過ぎていたら今から5分後）。
+   - `providers`: `[{"network":"youtube"}]`、`media`: 横動画のraw URL、`videoThumbnailUrl`: サムネのraw URL
+   - `text`: 説明文。`out/YYYYMMDD_meta.json` の `long.chapters` を「■目次」の見出しの下にそのまま貼る（YouTubeが自動で目次にする）。最後に「※この動画はAIツールを使って制作しています。」
+   - `youtubeData`: `{"title": "<タイトル>", "type": "video", "privacy": "public", "tags": [...], "category": "EDUCATION", "madeForKids": false, "isAiGeneratedContent": false}`
+2. **ショート**：公開日時は今日の **19:05**。`media`: ショートのraw URL。`youtubeData` の `type` は `"short"`、ほかは同じ（サムネは付けない）。説明文の1行目付近に「▶本編（フル版）はこちら https://www.youtube.com/channel/UC5btyvlkpQWNlyMhDj2I6Rg/videos」を入れる。
+3. 返ってきた `uuid` と `plannerUrl` を控える。エラーが出たら1回だけ再試行し、それでも失敗したらそこで止めて報告する。
+4. 予約したら作業を終えてよい（公開はMetricoolが行う）。翌日のレポートで公開を確認する。
 
 ## 6. 記録
-- `topics.json` に `{"date", "theme", "format", "style", "voice_preset", "facts":[...], "long_id", "short_id"}` を追記。
+- `topics.json` に `{"date", "theme", "format", "style", "voice_preset", "facts":[...], "long_title", "short_title", "metricool_uuids":[...]}（YouTubeの動画IDは予約時点では分からないので、タイトルで記録する）` を追記。
 - `scripts/YYYYMMDD.json` と `topics.json` を main にコミットして push（`git -c push.negotiate=true push origin main`）。
 - 最後に、タイトル2本・動画URL2本・扱った雑学の一覧を短く報告する。
 
-## 7. Instagramリール・TikTokへの転載（Metricool、月20投稿を使い切る）
-Metricool（blogId: `8198074`）の無料枠は**月20投稿**。リールとTikTokを別々の投稿として数え、**毎月ちょうど10回ずつ（計20）**、月内に均等に出す。
-1. `getBrandSettings` で instagram と tiktok が接続済みか確認。どちらも未接続ならこの章は飛ばす（片方だけなら、その1つで月20回を目標にする）。
-2. `sns_log.json` から今月の転載回数 `n`（日本時間の暦月）を数える。目標 `N`=10（片方だけなら20）、今日が月の `d` 日目、月の日数 `D` として、**`n < ceil(N × d / D)` のときだけ**今日転載する。`n >= N` なら絶対に転載しない。
-3. 転載する動画は、**Instagramは今日のショート**（`YYYYMMDD_short.mp4`）、**TikTokは今日のTikTok版**（`YYYYMMDD_tiktok.mp4`、本編と同じ内容の縦型・1分以上）。どちらも `upload-YYYYMMDD` ブランチの raw URL。
-4. `createScheduledPost` を**ネットワークごとに1件ずつ**作る。公開日時は今日の20:00（timezone `Asia/Tokyo`）。
+## 7. Instagramリール・TikTokへの投稿予約（Metricool、毎日）
+有料プラン（Starter）なので投稿数の上限はない。**毎日**両方に出す。
+1. `getBrandSettings` で instagram と tiktok が接続済みか確認。未接続のネットワークは飛ばす。
+2. 使う動画は、**Instagramは今日のショート**（`YYYYMMDD_short.mp4`）、**TikTokは今日のTikTok版**（`YYYYMMDD_tiktok.mp4`、厳選3パートの縦型・1分以上）。どちらも `upload-YYYYMMDD` ブランチの raw URL。
+3. `createScheduledPost` を**ネットワークごとに1件ずつ**作る。公開日時は今日の **20:00**（timezone `Asia/Tokyo`）。
    - Instagram: providers `[{"network":"instagram"}]`、`instagramData`: `{"type":"REEL","showReelOnFeed":true,"isAiGenerated":true}`。キャプションは2〜3行＋改行＋ハッシュタグ5〜8個（#雑学 #豆知識 ほか内容に合うもの）＋「YouTubeで本編公開中」。
    - TikTok: providers `[{"network":"tiktok"}]`、`tiktokData`: `{"privacyOption":"PUBLIC_TO_EVERYONE","isAigc":true,"title":"<短いタイトル>"}`。キャプションは1〜2行（本編から選りすぐった3つの雑学だと分かるように）＋ハッシュタグ3〜5個。
    - 文面はYouTubeのコピペにせず、各SNS向けに書き分ける。
-5. 投稿上限などのエラーが出たら再試行せず、その旨を記録して報告する。
-6. `sns_log.json` に `{"date","short_id","instagram":true/false,"tiktok":true/false}` を追記して main に push。
+4. エラーが出たら1回だけ再試行し、それでも失敗したら記録して報告する。
+5. `sns_log.json` に `{"date","instagram":true/false,"tiktok":true/false}` を追記して main に push。

@@ -16,8 +16,10 @@ GitHubリポジトリ zatsugakumainichitoukou-byte/zatsugaku-videos を追加し
 - YouTubeの数字はMetricool側への反映が2〜3日遅れることがある。直近の動画の数字が0や空のときは「反映待ちの可能性」と書く。
 - 取得に失敗した項目は推測で埋めず「取得できず」と書く。
 
+- 前日にMetricoolで予約した投稿（YouTube・Instagram・TikTok）が公開されたかも確認し、されていなければ報告の冒頭に書く（`getScheduledPosts` に残っている／エラーになっているものがないか）。
+
 ## 3. 保存
-`stats/YYYYMMDD.json` に、期間・SNS別合計・動画ごとの数字（YouTubeは topics.json と動画IDで突き合わせ、その日の theme / format / style / voice_preset と、横動画かショートかを付ける）を保存し、main に push。
+`stats/YYYYMMDD.json` に、期間・SNS別合計・動画ごとの数字（YouTubeは topics.json と動画ID、または公開日とタイトルで突き合わせ、その日の theme / format / style / voice_preset と、横動画かショートかを付ける）を保存し、main に push。
 
 ## 4. 分析
 - SNS別の、昨日1日分と直近7日の合計（再生・いいね・コメント・シェア・フォロワー増減）。前日比・前週比（過去の stats があれば）。
