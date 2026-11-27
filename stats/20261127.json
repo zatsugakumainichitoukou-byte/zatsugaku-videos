@@ -1,0 +1,665 @@
+{
+  "date": "2026-11-27",
+  "collected_at": "2026-11-28T08:55+09:00",
+  "period": {
+    "yesterday": "2026-11-27",
+    "last_7d": "2026-11-21〜2026-11-27"
+  },
+  "note": "TikTok/Instagramは動画ごと(TKPO/IGRE)の現時点累計の合計。『昨日』=11/27公開分(19:10公開・公開から約13時間)、『7日』=期間内公開分の合計。YouTube動画別(YTVV)は行なし。YTEV02に11/24=415が新たに反映（11/25以降null）。YTEV01(登録者数)=11/27に6（11/26は4）。YTEV05: 11/24=1、YTEV06: 11/24=0、11/25以降null。YTEV03(推定収益)は11/18〜11/24すべて0。TKEV07=0(11/27)、IGEV01=0(最終11/26)、TKEV16/17・IGEV43/44は11/28のみ0で他はnull→フォロワー増減は取得できず。TKPO13全件null。予約投稿4件(11/27 19:00 YT本編R6-vpHwgDN0、19:05 YTショートNTYLNI6DtGc、19:10 IG・TikTok)はすべてPUBLISHED。",
+  "totals": {
+    "youtube": {
+      "yesterday": {
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "subs_gained": null,
+        "subs_lost": null,
+        "videos_published": 2
+      },
+      "last_7d": {
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "subs_gained": null,
+        "subs_lost": null,
+        "videos_published": 14
+      },
+      "subscribers": 6,
+      "subscribers_note": "YTEV01: 11/26=4→11/27=6（総数の差で+2。YTEV05/06は11/25以降null）",
+      "channel_views_YTEV02": {
+        "2026-11-18": 253,
+        "2026-11-19": 932,
+        "2026-11-20": 347,
+        "2026-11-21": 739,
+        "2026-11-22": 1108,
+        "2026-11-23": 205,
+        "2026-11-24": 415
+      },
+      "channel_views_7d_partial": {
+        "range": "2026-11-21〜2026-11-24（反映済み4日分）",
+        "views": 2467
+      },
+      "revenue_YTEV03": {
+        "2026-11-18〜2026-11-24": 0.0
+      },
+      "status": "動画別は取得できず"
+    },
+    "tiktok": {
+      "yesterday": {
+        "views": 66,
+        "likes": 1,
+        "comments": 0,
+        "shares": 0,
+        "followers_gained": null,
+        "followers_lost": null
+      },
+      "last_7d": {
+        "views": 869,
+        "likes": 10,
+        "comments": 0,
+        "shares": 1,
+        "followers_gained": null,
+        "followers_lost": null
+      },
+      "followers": "0（TKEV07 11/27）",
+      "status": "完全視聴率・フォロワー増減は取得できず"
+    },
+    "instagram": {
+      "yesterday": {
+        "views": 159,
+        "likes": 1,
+        "comments": 1,
+        "shares": 0,
+        "saves": 0,
+        "followers_gained": null,
+        "followers_lost": null
+      },
+      "last_7d": {
+        "views": 938,
+        "likes": 2,
+        "comments": 1,
+        "shares": 0,
+        "saves": 0,
+        "followers_gained": null,
+        "followers_lost": null
+      },
+      "followers": "0（IGEV01 11/26）"
+    }
+  },
+  "comparison": {
+    "first_morning_views": {
+      "instagram": {
+        "11/19動物": 79,
+        "11/20宇宙": 109,
+        "11/21地理": 131,
+        "11/22生活用品": 113,
+        "11/23人体": 125,
+        "11/24日本語": 135,
+        "11/25植物": 142,
+        "11/26食べ物": 90,
+        "11/27歴史": 159
+      },
+      "tiktok": {
+        "11/21地理": 70,
+        "11/22生活用品": 22,
+        "11/23人体": 61,
+        "11/24日本語": null,
+        "11/25植物": 57,
+        "11/26食べ物": 57,
+        "11/27歴史": 66
+      }
+    },
+    "last_7d_vs_prev_report": {
+      "instagram_views": {
+        "now": 938,
+        "20261126_report": 848
+      },
+      "tiktok_views": {
+        "now": 869,
+        "20261126_report": 753
+      }
+    },
+    "growth_since_prev_report": {
+      "tiktok_11/26食べ物": [
+        57,
+        107
+      ],
+      "instagram_11/26食べ物": [
+        90,
+        125
+      ]
+    },
+    "prev_week": "前週比なし（前週は投稿・記録なし）"
+  },
+  "ranking_7d_shorts_ig_plus_tk": {
+    "top3": [
+      {
+        "theme": "日本語",
+        "ig": 138,
+        "tk": 216,
+        "total": 354
+      },
+      {
+        "theme": "地理",
+        "ig": 132,
+        "tk": 137,
+        "total": 269
+      },
+      {
+        "theme": "植物",
+        "ig": 143,
+        "tk": 106,
+        "total": 249
+      }
+    ],
+    "worst2": [
+      {
+        "theme": "食べ物",
+        "ig": 125,
+        "tk": 107,
+        "total": 232
+      },
+      {
+        "theme": "生活用品",
+        "ig": 114,
+        "tk": 119,
+        "total": 233
+      }
+    ],
+    "excluded": "11/27歴史は公開から約13時間のため比較対象外(IG159+TK66=225)",
+    "long_videos": "YouTube数値が取得できずランキング不可"
+  },
+  "short_avg_views_by_condition": {
+    "note": "各条件1〜2本で判断不可。傾向の芽：11/27の深掘り形式・歴史はIG初速159で過去最高（1本のみ）。IGのnightは2本とも下位のまま(114,125)"
+  },
+  "videos": {
+    "youtube": [
+      {
+        "video_id": "nhLYp58ZykA",
+        "type": "short",
+        "date": "2026-11-21",
+        "theme": "地理",
+        "format": "本当？ウソ？",
+        "style": "note",
+        "voice_preset": "keita_bright",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "9Hm7wkL90x0",
+        "type": "long",
+        "date": "2026-11-21",
+        "theme": "地理",
+        "format": "本当？ウソ？",
+        "style": "note",
+        "voice_preset": "keita_bright",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "t6gcZnX_hL4",
+        "type": "short",
+        "date": "2026-11-22",
+        "theme": "生活用品",
+        "format": "5選",
+        "style": "night",
+        "voice_preset": "nanami",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "98XduPh3up0",
+        "type": "long",
+        "date": "2026-11-22",
+        "theme": "生活用品",
+        "format": "5選",
+        "style": "night",
+        "voice_preset": "nanami",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "LyjCiUMKxnc",
+        "type": "short",
+        "date": "2026-11-23",
+        "theme": "人体",
+        "format": "クイズ",
+        "style": "pastel",
+        "voice_preset": "keita_bright",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "mBaMJ6IU6t4",
+        "type": "long",
+        "date": "2026-11-23",
+        "theme": "人体",
+        "format": "クイズ",
+        "style": "pastel",
+        "voice_preset": "keita_bright",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "weiPRc6FveI",
+        "type": "short",
+        "date": "2026-11-24",
+        "theme": "日本語",
+        "format": "10選",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "8S0vIr4cueU",
+        "type": "long",
+        "date": "2026-11-24",
+        "theme": "日本語",
+        "format": "10選",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "IeFKhab50BY",
+        "type": "short",
+        "date": "2026-11-25",
+        "theme": "植物",
+        "format": "ランキング",
+        "style": "note",
+        "voice_preset": "keita",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "ccVAt02CuMY",
+        "type": "long",
+        "date": "2026-11-25",
+        "theme": "植物",
+        "format": "ランキング",
+        "style": "note",
+        "voice_preset": "keita",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "Avcpz8Hf29g",
+        "type": "short",
+        "date": "2026-11-26",
+        "theme": "食べ物",
+        "format": "本当？ウソ？",
+        "style": "night",
+        "voice_preset": "keita_bright",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "8YA6HfYlJos",
+        "type": "long",
+        "date": "2026-11-26",
+        "theme": "食べ物",
+        "format": "本当？ウソ？",
+        "style": "night",
+        "voice_preset": "keita_bright",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "NTYLNI6DtGc",
+        "type": "short",
+        "date": "2026-11-27",
+        "theme": "歴史",
+        "format": "深掘り",
+        "style": "pastel",
+        "voice_preset": "nanami",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      },
+      {
+        "video_id": "R6-vpHwgDN0",
+        "type": "long",
+        "date": "2026-11-27",
+        "theme": "歴史",
+        "format": "深掘り",
+        "style": "pastel",
+        "voice_preset": "nanami",
+        "status": "YTVV行なし（取得できず）",
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null,
+        "avg_view_duration": null
+      }
+    ],
+    "tiktok": [
+      {
+        "published_utc": "2026-11-27T10:10:21Z",
+        "published_jst": "2026-11-27T19:10:21+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7712791341083774226",
+        "theme": "歴史",
+        "format": "深掘り",
+        "style": "pastel",
+        "voice_preset": "nanami",
+        "source_short_id": "NTYLNI6DtGc",
+        "views": 66,
+        "likes": 1,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-26T11:02:33Z",
+        "published_jst": "2026-11-26T20:02:33+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7712433483146186036",
+        "theme": "食べ物",
+        "format": "本当？ウソ？",
+        "style": "night",
+        "voice_preset": "keita_bright",
+        "source_short_id": "Avcpz8Hf29g",
+        "views": 107,
+        "likes": 1,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-25T11:05:43Z",
+        "published_jst": "2026-11-25T20:05:43+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7712063685815979285",
+        "theme": "植物",
+        "format": "ランキング",
+        "style": "note",
+        "voice_preset": "keita",
+        "source_short_id": "IeFKhab50BY",
+        "views": 106,
+        "likes": 2,
+        "comments": 0,
+        "shares": 1,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-24T11:04:58Z",
+        "published_jst": "2026-11-24T20:04:58+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7711692398044204309",
+        "theme": "日本語",
+        "format": "10選",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "source_short_id": "weiPRc6FveI",
+        "views": 216,
+        "likes": 5,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-23T11:05:55Z",
+        "published_jst": "2026-11-23T20:05:55+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7711321550523337985",
+        "theme": "人体",
+        "format": "クイズ",
+        "style": "pastel",
+        "voice_preset": "keita_bright",
+        "source_short_id": "LyjCiUMKxnc",
+        "views": 118,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-22T11:04:31Z",
+        "published_jst": "2026-11-22T20:04:31+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7710950094555614484",
+        "theme": "生活用品",
+        "format": "5選",
+        "style": "night",
+        "voice_preset": "nanami",
+        "source_short_id": "t6gcZnX_hL4",
+        "views": 119,
+        "likes": 1,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-21T11:04:42Z",
+        "published_jst": "2026-11-21T20:04:42+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7710579035369245960",
+        "theme": "地理",
+        "format": "本当？ウソ？",
+        "style": "note",
+        "voice_preset": "keita_bright",
+        "source_short_id": "nhLYp58ZykA",
+        "views": 137,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-20T11:03:48Z",
+        "published_jst": "2026-11-20T20:03:48+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7710207743986109697",
+        "theme": "宇宙",
+        "format": "ランキング",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "source_short_id": "r4rY4h-NFMI",
+        "views": 1,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      },
+      {
+        "published_utc": "2026-11-19T11:04:35Z",
+        "published_jst": "2026-11-19T20:04:35+09:00",
+        "url": "https://www.tiktok.com/@zatsugaku.taro/video/7709836843486907669",
+        "theme": "動物",
+        "format": "クイズ",
+        "style": "night",
+        "voice_preset": "keita",
+        "source_short_id": "F7CzMLbmHRc",
+        "views": 0,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "full_watch_rate": null
+      }
+    ],
+    "instagram": [
+      {
+        "published_utc": "2026-11-27T10:11:56Z",
+        "published_jst": "2026-11-27T19:11:56+09:00",
+        "url": "https://www.instagram.com/reel/DgPbwCdBUvX/",
+        "theme": "歴史",
+        "format": "深掘り",
+        "style": "pastel",
+        "voice_preset": "nanami",
+        "source_short_id": "NTYLNI6DtGc",
+        "views": 159,
+        "likes": 1,
+        "comments": 1,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-26T11:08:04Z",
+        "published_jst": "2026-11-26T20:08:04+09:00",
+        "url": "https://www.instagram.com/reel/DgM9RyMPDpQ/",
+        "theme": "食べ物",
+        "format": "本当？ウソ？",
+        "style": "night",
+        "voice_preset": "keita_bright",
+        "source_short_id": "Avcpz8Hf29g",
+        "views": 125,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-25T11:08:50Z",
+        "published_jst": "2026-11-25T20:08:50+09:00",
+        "url": "https://www.instagram.com/reel/DgKYbsSNLo-/",
+        "theme": "植物",
+        "format": "ランキング",
+        "style": "note",
+        "voice_preset": "keita",
+        "source_short_id": "IeFKhab50BY",
+        "views": 143,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-24T11:07:22Z",
+        "published_jst": "2026-11-24T20:07:22+09:00",
+        "url": "https://www.instagram.com/reel/DgHzfoeCZ0i/",
+        "theme": "日本語",
+        "format": "10選",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "source_short_id": "weiPRc6FveI",
+        "views": 138,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-23T11:02:53Z",
+        "published_jst": "2026-11-23T20:02:53+09:00",
+        "url": "https://www.instagram.com/reel/DgFOfK-jC9L/",
+        "theme": "人体",
+        "format": "クイズ",
+        "style": "pastel",
+        "voice_preset": "keita_bright",
+        "source_short_id": "LyjCiUMKxnc",
+        "views": 127,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-22T11:07:25Z",
+        "published_jst": "2026-11-22T20:07:25+09:00",
+        "url": "https://www.instagram.com/reel/DgCqAgeiZry/",
+        "theme": "生活用品",
+        "format": "5選",
+        "style": "night",
+        "voice_preset": "nanami",
+        "source_short_id": "t6gcZnX_hL4",
+        "views": 114,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-21T11:05:11Z",
+        "published_jst": "2026-11-21T20:05:11+09:00",
+        "url": "https://www.instagram.com/reel/DgAFMhnkcN_/",
+        "theme": "地理",
+        "format": "本当？ウソ？",
+        "style": "note",
+        "voice_preset": "keita_bright",
+        "source_short_id": "nhLYp58ZykA",
+        "views": 132,
+        "likes": 1,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-20T11:08:25Z",
+        "published_jst": "2026-11-20T20:08:25+09:00",
+        "url": "https://www.instagram.com/reel/Df9gcFljaDc/",
+        "theme": "宇宙",
+        "format": "ランキング",
+        "style": "pop",
+        "voice_preset": "nanami_calm",
+        "source_short_id": "r4rY4h-NFMI",
+        "views": 110,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      {
+        "published_utc": "2026-11-19T11:05:00Z",
+        "published_jst": "2026-11-19T20:05:00+09:00",
+        "url": "https://www.instagram.com/reel/Df67lailKxX/",
+        "theme": "動物",
+        "format": "クイズ",
+        "style": "night",
+        "voice_preset": "keita",
+        "source_short_id": "F7CzMLbmHRc",
+        "views": 110,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      }
+    ]
+  }
+}
